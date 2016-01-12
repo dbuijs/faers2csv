@@ -1,0 +1,9 @@
+#!/bin/bash
+
+prefix=$(echo $1| cut -d/ -f6)
+
+infile=$(echo $1 |cut -d/ -f7)
+
+outfile=${prefix}_${infile}
+
+curl -o $outfile $1
