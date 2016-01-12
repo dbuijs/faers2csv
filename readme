@@ -1,3 +1,8 @@
+# From a fresh Ubuntu droplet
+# install git jq cpanminus parallel make unzip
+
+# install recordstream with cpanm --interactive App::RecordStream, say no to all options
+# git clone https://github.com/andreafabrizi/Dropbox-Uploader
 # Process open.fda.gov data files from JSON to CSV
 # dbuijs@gmail.com
 # Uses jq (v1.5), perl RecordStream
