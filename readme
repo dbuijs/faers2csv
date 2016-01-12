@@ -1,5 +1,5 @@
 # From a fresh Ubuntu droplet
-# install git jq cpanminus parallel make unzip
+# install git jq cpanminus parallel make unzip screen
 
 # install recordstream with cpanm --interactive App::RecordStream, say no to all options
 # git clone https://github.com/andreafabrizi/Dropbox-Uploader
