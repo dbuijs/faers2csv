@@ -22,7 +22,9 @@ parallel --progress 'unzip -p {1}|
                       ../Dropbox-Uploader/dropbox_uploader.sh upload csv/{1/.}.{2/.}.csv faers2csv;
                       rm csv/{1/.}.{2/.}.csv' ::: downloads/*.json.zip ::: *.jq
 
-parallel --progress 'echo Starting {1} {2}; cat {1} | jq -c -f {2} | recs-xform -MDigest::MD5=md5_hex '{{openfda_md5}} = md5_hex(join(\";\", {{#openfda}}))| recs-tocsv > {1.}.{2.}.csv' ::: *.json.zip ::: *.jq
+parallel --progress 'echo Starting {1} {2}; cat {1} | jq -c -f {2} | recs-annotate -k !openfda! -MDigest::MD5=md5_hex '{{openfda_md5}} = md5_hex(join(\";\", $r))'| recs-tocsv > {1.}.{2.}.csv' ::: *.json.zip ::: *.jq
+
+
 
 
 http://download.open.fda.gov/drug/event/2005q1/drug-event-0001-of-0001.json.zip
