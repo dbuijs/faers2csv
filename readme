@@ -22,13 +22,10 @@ parallel --progress 'unzip -p {1}|
                       ../Dropbox-Uploader/dropbox_uploader.sh upload csv/{1/.}.{2/.}.csv faers2csv;
                       rm csv/{1/.}.{2/.}.csv' ::: downloads/*.json.zip ::: *.jq
                       
-parallel --progress 'recs-fromcsv {1}| 
+parallel --progress "recs-fromcsv --header {1}| 
                       recs-annotate -k !openfda! -MDigest::MD5=md5_hex '{{openfda_md5}} = md5_hex(join(\";\", $r))'| 
-                      tee >(recs-tocsv -k > {1.}.{2.}.csv)  >(recs-collate -k !openfda! count | recs-tocsv > file.csv)' ::: *.json.zip ::: *.jq
-                     
-
-                      
-                      
+                      tee >(recs-tocsv -k safetyreportid,actiondrug,activesubstancename,medicinalproduct,openfda_md5,!drug! > csv/{1.}.trim.csv))  
+                          >(recs-collate -k !openfda! count | recs-tocsv > csv/{1.}.openfda.csv)" ::: *drugfilter.json.zip 
 
 parallel --progress 'echo Starting {1} {2}; cat {1} | jq -c -f {2} | recs-tocsv > {1.}.{2.}.csv' ::: *.json.zip ::: *.jq
 
