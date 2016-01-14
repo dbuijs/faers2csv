@@ -9,7 +9,7 @@
 |map(with_entries(select(.key == "safetyreportid")) + (.patient.drug[]))
 
 # Flattens .openfda and turns openfda arrays into strings delimited with ;
-|map(with_entries(select(.key != "openfda")) + (.openfda//{openfda:{"NA":"NA"}}|with_entries(.value = ([.value[]|tostring]|join(";")) |.key |= "openfda_"  + .)))
+|map(with_entries(select(.key != "openfda")) + (.openfda//{openfda:{"NA":"NA"}}|with_entries(.value = ([.value[]|tostring]|sort|join(";")) |.key |= "openfda_"  + .)))
 
 #Flattens .activesubstance array
 |map(with_entries(select(.key != "activesubstance")) + (.activesubstance))
