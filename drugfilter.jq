@@ -14,5 +14,5 @@
 #Flattens .activesubstance array
 |map(with_entries(select(.key != "activesubstance")) + (.activesubstance))
 
-#Iterates through array of objects to return a stream of objects instead of a single array
-|.[]
+#Grabs all keys, and builds CSV, to fix jagged array
+|(map(keys)|add|unique) as $keys| $keys, (.[]|[.[$keys[]]])|@csv
