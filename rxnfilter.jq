@@ -9,5 +9,5 @@
 #Creates new object with .safetyreportid string and .patient.reaction array
 |map(with_entries(select(.key == "safetyreportid")) + (.patient.reaction[]))
 
-#Iterates through array of objects to return a stream of objects instead of a single array
-|.[]
+# Grabs all unique keys and spits out CSV
+|(map(keys)|add|unique) as $keys| $keys, (.[]|[.[$keys[]]])|@csv
