@@ -36,5 +36,5 @@
 |map(del(.patient_summary_patient_summary))
 
 
-#Iterates through array of objects to return a stream of objects instead of a single array
-|.[]
+# grabs all unique keys and spits out CSV
+|(map(keys)|add|unique) as $keys| $keys, (.[]|[.[$keys[]]])|@csv
