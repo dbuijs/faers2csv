@@ -2,7 +2,7 @@
 # Takes open.fda.gov drug event JSON and transforms into compact flat linear records suitable for Perl recs-tocsv
 .[]
 #start from the .results array
-.results
+|.results
 
 
 #Creates new object with .safetyreportid string and .patient.drug array
