@@ -1,8 +1,8 @@
 # Require jq > 1.4
 # Takes open.fda.gov drug event JSON and transforms into compact flat linear records suitable for Perl recs-tocsv
-
+.[]
 # start from the .results array
-.results
+|.results
 
 
 
@@ -22,19 +22,21 @@
                          .key != "sender" and 
                          .key != "receiver" and 
                          .key != "patient_summary" and 
-                         .key != "reportduplicate")) + 
+                         .key != "reportduplicate" and
+                         .key != "patient_patientdeath")) + 
        (.primarysource//{patientsource:{"NA":"NA"}}|with_entries(.key = "primarysource_" + .key)) + 
        (.sender//{sender:{"NA":"NA"}}|with_entries(.key = "sender_" + .key)) + 
        (.receiver//{receiver:{"NA":"NA"}}|with_entries(.key = "receiver_" + .key)) + 
        (.patient_summary//{patient_summary:{"NA":"NA"}}|with_entries(.key = "patient_summary_" + .key)) + 
-       (.report_duplicate//{report_duplicate:{"NA":"NA"}}|with_entries(.key = "report_duplicate_" + .key)))
+       (.report_duplicate//{report_duplicate:{"NA":"NA"}}|with_entries(.key = "report_duplicate_" + .key))+
+       (.patient_patientdeath//{patient_patientdeath:{"NA":"NA"}}|with_entries(.key = "patient_patientdeath_" + .key)))
 
 |map(del(.primarysource_primary_source))
 |map(del(.sender_sender))
 |map(del(.receiver_receiver))
 |map(del(.report_duplicate_report_duplicate))
 |map(del(.patient_summary_patient_summary))
-
+|map(del(.patient_patientdeath_patient_patientdeath))
 
 # grabs all unique keys and spits out CSV
 |(map(keys)|add|unique) as $keys| $keys, (.[]|[.[$keys[]]])|@csv
