@@ -24,7 +24,7 @@
                          .key != "patient_summary" and 
                          .key != "reportduplicate" and
                          .key != "patient_patientdeath")) + 
-       (.primarysource//{patientsource:{"NA":"NA"}}|with_entries(.key = "primarysource_" + .key)) + 
+       (.primarysource//{primarysource:{"NA":"NA"}}|with_entries(.key = "primarysource_" + .key)) + 
        (.sender//{sender:{"NA":"NA"}}|with_entries(.key = "sender_" + .key)) + 
        (.receiver//{receiver:{"NA":"NA"}}|with_entries(.key = "receiver_" + .key)) + 
        (.patient_summary//{patient_summary:{"NA":"NA"}}|with_entries(.key = "patient_summary_" + .key)) + 
