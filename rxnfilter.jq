@@ -10,4 +10,5 @@
 |map(with_entries(select(.key == "safetyreportid")) + (.patient.reaction[]))
 
 # Grabs all unique keys and spits out CSV
-|(map(keys)|add|unique) as $keys| $keys, (.[]|[.[$keys[]]])|@csv
+|["safetyreportid","reactionmeddrapt","reactionmeddraversionpt","reactionoutcome"] as $keys
+|$keys, (.[]|[.[$keys[]]])|@csv
