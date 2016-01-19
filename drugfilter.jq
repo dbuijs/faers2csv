@@ -46,7 +46,6 @@
 "openfda_generic_name",
 "openfda_manufacturer_name",
 "openfda_nui",
-"openfda_openfda",
 "openfda_package_ndc",
 "openfda_pharm_class_cs",
 "openfda_pharm_class_epc",
