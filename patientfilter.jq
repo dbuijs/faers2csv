@@ -31,7 +31,7 @@
        (.report_duplicate//{report_duplicate:{"NA":"NA"}}|with_entries(.key = "report_duplicate_" + .key))+
        (.patient_patientdeath//{patient_patientdeath:{"NA":"NA"}}|with_entries(.key = "patient_patientdeath_" + .key)))
 
-|map(del(.primarysource_primary_source))
+|map(del(.primarysource_primarysource))
 |map(del(.sender_sender))
 |map(del(.receiver_receiver))
 |map(del(.report_duplicate_report_duplicate))
