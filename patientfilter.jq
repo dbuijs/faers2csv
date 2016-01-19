@@ -39,4 +39,40 @@
 |map(del(.patient_patientdeath_patient_patientdeath))
 
 # grabs all unique keys and spits out CSV
-|(map(keys)|add|unique) as $keys| $keys, (.[]|[.[$keys[]]])|@csv
+|["safetyreportid",
+"authoritynumb",
+"companynumb",
+"duplicate",
+"fulfillexpeditecriteria",
+"occurcountry",
+"patient_patientagegroup",
+"patient_patientonsetage",
+"patient_patientonsetageunit",
+"patient_patientsex",
+"patient_patientweight",
+"patient_summary_narrativeincludeclinical",
+"primarysource_literaturereference",
+"primarysource_qualification",
+"primarysource_reportercountry",
+"primarysourcecountry",
+"receiptdate",
+"receiptdateformat",
+"receivedate",
+"receivedateformat",
+"receiver_receiverorganization",
+"receiver_receivertype",
+"reporttype",
+"safetyreportversion",
+"sender_senderorganization",
+"sender_sendertype",
+"serious",
+"seriousnesscongenitalanomali",
+"seriousnessdeath",
+"seriousnessdisabling",
+"seriousnesshospitalization",
+"seriousnesslifethreatening",
+"seriousnessother",
+"transmissiondate",
+"transmissiondateformat"] as $keys
+|$keys, (.[]|[.[$keys[]]])|@csv
+
