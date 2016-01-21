@@ -1,7 +1,7 @@
 #!/bin/bash
 # Run in main faers2csv folder with jq v1.5
 
-parallel --progress 'unzip -p {1}| jq -s -r -f {2} > csv/{1/.}.{2/.}.csv' ::: downloads/.*.json.zip ::: *.jq
+parallel --progress 'unzip -p {1}| jq -s -r -f {2} > csv/{1/.}.{2/.}.csv' ::: downloads/*.json.zip ::: *.jq
 
 parallel --progress 'recs-fromcsv --header {} | \
   recs-annotate -k !^openfda! -MDigest::MD5=md5_hex \
