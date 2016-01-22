@@ -30,3 +30,11 @@ I don't delete the intermediate **drug** CSVs just yet, but instead move them to
 
 ### Zip and transfer
 Assuming you're running these scripts on a multi-core processor, [pbzip2](http://compression.ca/pbzip2/) lets you use them all to improve the speed of `bzip`. I use [Dropbox-Uploader](https://github.com/andreafabrizi/Dropbox-Uploader) to dump everything at the end so I can destroy the droplet as soon as posisble. 
+
+## The Files
+
+* **fdadl**: This is a script to download the zipped JSON from [open.fda.gov](http://open.fda.gov)
+* **patientfilter.jq**: This is the `jq` script to produce the patient CSV.
+* **rxnfilter.jq**: This is the `jq` script to produce the reaction CSV.
+* **drugfilter.jq**: This is the `jq` script to product the intermediate drugfilter CSV.
+* **
