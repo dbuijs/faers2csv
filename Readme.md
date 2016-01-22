@@ -38,5 +38,5 @@ Assuming you're running these scripts on a multi-core processor, [pbzip2](http:/
 * **rxnfilter.jq**: This is the `jq` script to produce the reaction CSV.
 * **drugfilter.jq**: This is the `jq` script to product the intermediate drugfilter CSV.
 * **faers2csv.sh**: This is the bash script that uses `parallel` to call everythign else. 
-..* Make sure you've got a `downloads` folder with the zipped JSONs, empty `csv`, `drugbackup`, and `stats` folders, and the `jq` filters in the same dir you run this script from.
+   * Make sure you've got a `downloads` folder with the zipped JSONs, empty `csv`, `drugbackup`, and `stats` folders, and the `jq` filters in the same dir you run this script from.
 * **scratchpad**: This is my scratch space. ignore it. or don't.
