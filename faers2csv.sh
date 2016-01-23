@@ -10,7 +10,7 @@ parallel --eta 'recs-fromcsv --header {} | \
   |recs-tocsv -k receiptdate,safetyreportid,actiondrug,activesubstancename,medicinalproduct,openfda_md5,openfda_brand_name,openfda_generic_name,!^drug! > csv/{/.}.drug.csv; \
   mv {} drugbackup/{/}' ::: csv/*.drugfilter.csv
 
-parallel --eta 'csvstat {} stats/{/.}.report.txt' ::: csv/*.csv
+parallel --eta 'csvstat {} > stats/{/.}.report.txt' ::: csv/*.csv
 
 tar cf faerscsv.tar.bz2 --use-compress-prog=pbzip2 csv/
 taf cf faerstats.tar.bz2 --use-compress-prog=pbzip2 stats/
