@@ -6,7 +6,7 @@
 
 
 #Creates new object with .safetyreportid string and .patient.drug array
-|map(with_entries(select(.key == "safetyreportid")) + (.patient.drug[]))
+|map(with_entries(select(.key == "safetyreportid", .key == "receiptdate")) + (.patient.drug[]))
 
 # Flattens .openfda and turns openfda arrays into strings delimited with ;
 |map(with_entries(select(.key != "openfda")) + (.openfda//{openfda:{"NA":"NA"}}|with_entries(.value = ([.value[]|tostring]|sort|join(";")) |.key |= "openfda_"  + .)))
@@ -15,7 +15,8 @@
 |map(with_entries(select(.key != "activesubstance")) + (.activesubstance))
 
 #Grabs all keys, and builds CSV, to fix jagged array
-|["safetyreportid",
+|["receiptdate",
+"safetyreportid",
 "actiondrug",
 "activesubstancename",
 "drugadditional",
