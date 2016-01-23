@@ -7,8 +7,8 @@
 
 
 #Creates new object with .safetyreportid string and .patient.reaction array
-|map(with_entries(select(.key == "safetyreportid")) + (.patient.reaction[]))
+|map(with_entries(select(.key == "safetyreportid", .key == "receiptdate")) + (.patient.reaction[]))
 
 # Grabs all unique keys and spits out CSV
-|["safetyreportid","reactionmeddrapt","reactionmeddraversionpt","reactionoutcome"] as $keys
+|["receiptdate","safetyreportid","reactionmeddrapt","reactionmeddraversionpt","reactionoutcome"] as $keys
 |$keys, (.[]|[.[$keys[]]])|@csv
