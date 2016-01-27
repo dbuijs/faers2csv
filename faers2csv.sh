@@ -1,7 +1,7 @@
 #!/bin/bash
 # Run in main faers2csv folder with jq v1.4
 
-parallel --eta 'unzip -p {}|tee >(jq -r -f reactionfilter.jq > csv/{/.}.reaction.csv) \
+parallel --eta 'unzip -p {}|tee >(jq -r -f rxnfilter.jq > csv/{/.}.reaction.csv) \
 >(jq -r -f patientfilter.jq > csv/{/.}.patient.csv) | jq -c -f drugfilter.jq |\
 recs-annotate -k !^openfda! -MDigest::MD5=md5_hex \
     '\''{{openfda_md5}} = md5_hex(join(";", sort @{$r->get_group_values("!^openfda!", 1)}))'\'' \
