@@ -35,7 +35,7 @@ recs-annotate -k !^openfda! -MDigest::MD5=md5_hex \
   drugstartdate,\
   drugstartdateformat,\
   drugtreatmentduration,\
-  drugtreamentdurationunit |csvformat -B > csv/{/.}.drug.csv' ::: downloads/*.json.zip
+  drugtreatmentdurationunit |csvformat -B > csv/{/.}.drug.csv' ::: downloads/*.json.zip
 
 parallel --eta 'csvstat {} > stats/{/.}.report.txt' ::: csv/*.csv
 
