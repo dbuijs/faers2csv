@@ -1,11 +1,34 @@
 #!/bin/bash
 # Run in main faers2csv folder with jq v1.4
 
-parallel --eta 'unzip -p {}|tee >(jq -S -r -f rxnfilter.jq |csvformat -B > csv/{/.}.reaction.csv) \
+parallel -j 16 --eta 'unzip -p {}|tee >(jq -S -r -f rxnfilter.jq |csvformat -B > csv/{/.}.reaction.csv) \
 >(jq -S -r -f patientfilter.jq |csvformat -B > csv/{/.}.patient.csv) | jq -S -c -f drugfilter.jq |\
 recs-annotate -k !^openfda! -MDigest::MD5=md5_hex \
     '\''{{openfda_md5}} = md5_hex(join(";", sort @{$r->get_group_values("!^openfda!", 1)}))'\'' \
-  |tee >(recs-collate -k !^openfda! -a count |recs-tocsv|csvformat -B > csv/{/.}.openfda.csv) \
+  |tee >(recs-collate -k !^openfda! -a count \
+  |recs-tocsv -k openfda_md5,\
+  count,\
+  openfda_brand_name,\
+  openfda_generic_name,\
+  openfda_application_number,\
+  openfda_dosage_form,\
+  openfda_manufacturer_name,\
+  openfda_is_original_packager,\
+  openfda_product_ndc,\
+  openfda_nui,\
+  openfda_package_ndc,\
+  openfda_product_type,\
+  openfda_route,\
+  openfda_substance_name,\
+  openfda_spl_id,\
+  openfda_spl_set_id,\
+  openfda_pharm_class_epc,\
+  openfda_pharm_class_moa,\
+  openfda_pharm_class_cs,\
+  openfda_pharm_class_pe,\
+  openfda_upc,\
+  openfda_unii,\
+  openfda_rxcui |csvformat -B > csv/{/.}.openfda.csv) \
   |recs-tocsv -k receiptdate,\
   safetyreportid,\
   actiondrug,\
@@ -42,4 +65,4 @@ parallel --eta 'csvstat {} > stats/{/.}.report.txt' ::: csv/*.csv
 tar cf faerscsv.tar.bz2 --use-compress-prog=pbzip2 csv/
 tar cf faerstats.tar.bz2 --use-compress-prog=pbzip2 stats/
 
-parallel --eta '../Dropbox-Uploader/dropbox_uploader.sh upload {} csv6' ::: *.bz2
+parallel --eta '../Dropbox-Uploader/dropbox_uploader.sh upload {} csv7' ::: *.bz2
