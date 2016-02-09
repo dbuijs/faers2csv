@@ -50,3 +50,8 @@ I've also included some scripts that I use with [pgloader](http://pgloader.io/) 
 * **pgload.rxn**: This is a command file for use with pgloader to load the reaction CSVs into a PostgreSQL table of the same name. You must edit this file before running with pgloader!
 * **pgload.openfda**: This is a command file for use with pgloader to load the openfda CSVs into a PostgreSQL table of the same name. You must edit this file before running with pgloader!
 * **scratchpad**: This is my scratch space. ignore it. or don't.
+
+## Sample output
+
+Zipped output files generated on Jan 29, 2016 are available here:  https://zenodo.org/record/45589
+If you find any discrepancies or errors, please submit a new issue.
